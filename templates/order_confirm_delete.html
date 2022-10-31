@@ -1,0 +1,20 @@
+{% extends 'index.html' %} {% load static %} {% block content %}
+<div class="container">
+    <div class="col-md-12">
+        <div class="alert-danger mt-2">
+            <form method="post">{% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'eccomapp:home' %}">
+                        <button type="button" class="close m-3" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></a>
+                    <p class=" alert">Are you sure about deleting <strong class="text-danger">"{{ object }}"?</strong></p>
+
+                    {{ form }}
+                    <input class="btn btn-sm btn-danger m-4" type="submit" value="delete">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

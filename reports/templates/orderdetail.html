@@ -1,0 +1,59 @@
+{% extends 'report.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %} order detail{% endblock %}{% load humanize %} {% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 bg-light">
+            <h3>Customer detail</h3>
+            <div style="flex:2"><strong>Order id:  </strong><span class="strong fs-6">#ORDER_{{ord_obj.id}}</span></div>
+            <hr>
+            <div style="flex:2"><strong>Order cart:  </strong><span class="strong fs-6">{{ord_obj.cart}}</span></div>
+            <hr>
+            <div style="flex:2"><strong>Order cart: </strong><span class="strong fs-6">{{ord_obj.order_status}}</span></div>
+            <hr>
+            <div style="flex:1"><strong>Ordered at: </strong><span class="strong fs-6">{{ord_obj.created_at}} ({{ord_obj.created_at|timesince }}) ago</span></div>
+            <hr>
+            <div style="flex:1"><strong>Customer Info: </strong><span class="strong fs-6">{{ord_obj.ordered_by }},({{ord_obj.email }}) </span></div>
+            <hr>
+            <div style="flex:1"><strong>Address: </strong><span class="strong fs-6">{{ord_obj.shipping_address}}</span>
+                <hr>
+            </div>
+            <div style="flex:1"><strong>Shipping Address:</strong><span class="strong fs-5">shipping_address}} call: ({{ord_obj.mobile }})</span>
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3>Product Detail</h3>
+            <table class="table">
+                <thead>
+                    <th>SN</th>
+                    <th>Item</th>
+                    <th>Image</th>
+                    <th>Color</th>
+                    <th>Rate</th>
+                    <th>Dcnt</th>
+                    <th>Quantity</th>
+                    <th>subtotal</th>
+                </thead>
+                <tbody>
+                    {% for cp in ord_obj.cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a target="_blank" href="{% url 'eccomapp:productdetail' cp.product.slug %}">{{cp.product.title}}({{cp.product.id}})</a> </td>
+                        <td><img src="{{cp.product.image.url}}" class="img-fluid" width="40px" height="80px"></td>
+                        <td>{{cp.product.color}}</td>
+                        <td>{{cp.rate}}</td>
+                        <td>{{cp.product.discount}}%</td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal}}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="7" class="text-right">Total: </th>
+                        <th>ksh. {{ord_obj.total|intcomma}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

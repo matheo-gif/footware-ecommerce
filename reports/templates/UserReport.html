@@ -1,0 +1,28 @@
+{% extends 'report.html' %} {%load static%} {% block title %}Customers {% endblock %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>customers</h2>
+            <table class="table">
+                <thead>
+                    <th>username</th>
+                    <th>Email</th>
+                    <th>Full name</th>
+                    <th>Address</th>
+                </thead>
+                <tbody>
+                    {% for customer in cust %}
+                    <tr>
+                        <td>{{customer.user.username}}</td>
+                        <td>{{customer.user.email}}</td>
+                        <td>{{customer.full_name}}</td>
+                        <td>{{customer.address}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-sm btn-dark" href="#">create pdf</a>
+        </div>
+    </div>
+</div>
+{% endblock%}

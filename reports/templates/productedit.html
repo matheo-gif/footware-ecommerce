@@ -1,0 +1,19 @@
+{% extends 'report.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %}upadate{% endblock %} {% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class=" fw-normal text-primary">upadate product</h1>
+            <div class="form-control">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %} {{form | crispy }}
+            </div>
+            <button class=" btn btn-sm w-100 btn-outline-primary mt-2" type="submit">save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</section>
+{% endblock %}

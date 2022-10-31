@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="container">
+	<div class="card-header mt-5 d-flex justify-content-between">
+		<a href="" class="btn btn-sm btn-outline-dark text-decoration-none"><<</a>
+		<p class="text-success fs-6"> Product added to cart successful</p>
+		<a href="{% url 'eccomapp:mycart' %}" class="btn btn-sm btn-outline-info text-left">view cart</a>
+	</div>
+	
+</div>
+{% endblock %}

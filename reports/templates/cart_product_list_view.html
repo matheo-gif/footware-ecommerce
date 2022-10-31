@@ -1,0 +1,45 @@
+{% extends 'report.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <h3>Cart Product</h3>
+                <a class="btn btn-sm btn-dark" href="#">create pdf</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Picture</th>
+                        <th>Product</th>
+                        <th>Rate</th>
+                        <th>quantity</th>
+                        <th>subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cartproduct in cp %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img src="{{cartproduct.product.image.url}}" class="" width="50px" height="50px"></td>
+                        <td>{{cartproduct.product.title}}</td>
+                        <td>{{cartproduct.rate}}</td>
+                        <td>{{cartproduct.quantity}}</td>
+                        <td>{{cartproduct.subtotal}}</td>
+                        <td>
+                            <div class="d-flex">
+                                <a class="btn btn-sm btn-success mx-1" href="#">edit</a>
+                                <a class="btn btn-sm btn-danger" href="#">del</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

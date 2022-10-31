@@ -1,0 +1,42 @@
+{% extends 'report.html' %} {%load static%} {% block title %}Customers {% endblock %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Order Report</h2>
+            <table class="table">
+                <thead>
+                    <th>SN</th>
+                    <th>order</th>
+                    <th>cart</th>
+                    <th>customer </th>
+                    <th>address</th>
+                    <th> mobile</th>
+                    <th> email</th>
+                    <th> subtotal</th>
+                    <th> total</th>
+                    <th>status</th>
+                    <th>ordered on</th>
+                </thead>
+                <tbody>
+                    {% for order in ord %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'reports:orderdetail' order.id %}" class="text-decoration-none"> #ORDER_{{order.id}}</a></td>
+                        <td>{{order.cart}}</td>
+                        <td>{{order.ordered_by}}</td>
+                        <td>{{order.shipping_address}}</td>
+                        <td>{{order.mobile}}</td>
+                        <td>{{order.email}}</td>
+                        <td>{{order.subtotal}}</td>
+                        <td>{{order.total}}</td>
+                        <td>{{order.order_status}}</td>
+                        <td>{{order.created_at |timesince}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-sm btn-dark" href="#">create pdf</a>
+        </div>
+    </div>
+</div>
+{% endblock%}

@@ -1,0 +1,51 @@
+{% extends 'report.html' %} {%load static%} {% block title %}Customers {% endblock %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <h2>Product Report</h2>
+                <a class="btn btn-sm btn-dark m-2" href="{% url 'reports:productcreate' %}">add product</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <th>SN</th>
+                    <th>product id</th>
+                    <th>title</th>
+                    <th>category </th>
+                    <th>stock</th>
+                    <th>discount</th>
+                    <th>marked_price </th>
+                    <th>selling_price</th>
+                    <th>warranty</th>
+                    <th>view</th>
+                    <th>action</th>
+                </thead>
+                <tbody>
+                    {% for product in pro %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="" class="text-decoration-none"> #PRODUCT_{{product.slug}}({{product.id}})</a></td>
+
+                        <td>{{product.title}}</td>
+                        <td>{{ product.category}}</td>
+                        <td>{{ product.stock}}</td>
+                        <td>{{ product.discount}}%</td>
+                        <td>{{ product.marked_price}}</td>
+                        <td>{{ product.selling_price}}</td>
+                        <td>{{ product.warranty}}</td>
+                        <td>{{ product.view_count}}</td>
+                        <td>
+                            <div class="d-flex">
+                                <a class="btn btn-sm btn-success mx-1" href="{% url 'reports:productedit' product.slug %}">edit</a>
+                                <a class="btn btn-sm btn-danger" href="{% url 'reports:productdel' product.slug %}">del</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-sm btn-dark" href="#">create pdf</a>
+        </div>
+    </div>
+</div>
+{% endblock%}

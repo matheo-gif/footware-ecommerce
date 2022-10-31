@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container mt-4">
+	<div class="row">
+		<div class="col-md-8">
+			<h3>Products</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>SN</th>
+						<th>Picture</th>
+						<th>Product</th>
+						<th>Rate</th>
+						<th>quantity</th>
+						<th>subtotal</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for cp in cart.cartproduct_set.all %}
+					<tr>
+						<td>{{forloop.counter}}</td>
+						<td><img src="{{cp.product.image.url}}"class="bd-placeholder-img card-img-top" width="10%" height="50"></td>
+						<td>{{cp.product.title}}</td>
+						<td>{{cp.rate}}</td>
+						<td>{{cp.quantity}}</td>
+						<td>{{cp.subtotal}}</td>
+						<td>
+							<a href="{% url 'eccomapp:managecart' cp.id %}?action=inc" class="btn btn-sm btn-primary">+</a>
+							<a href="{% url 'eccomapp:managecart' cp.id %}?action=dcr"class="btn btn-sm btn-warning">-</a>
+							<a href="{% url 'eccomapp:managecart' cp.id %}?action=rmv"class="btn btn-sm btn-danger">x</a>
+						</td>
+					</tr>
+					{% endfor %}
+					<tr>
+						<th colspan="5" class="text-right">Total:</th>
+						<th>ksh.{{cart.total}}</th>
+						{% if cart.cartproduct_set.all %}
+						<th><a href="{% url 'eccomapp:emptycart' %}" class="btn btn-sm btn-outline-danger">Empty Cart</a></th>
+						{% endif %}
+					</tr>
+					<tr>
+						{% if cart.cartproduct_set.all %}
+						<th><a href="{% url 'eccomapp:checkout' %}" class="btn btn-sm btn-outline-info">Checkout</a></th>
+						{% endif %}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
